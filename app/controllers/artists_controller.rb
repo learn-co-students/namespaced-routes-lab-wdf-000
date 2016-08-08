@@ -1,6 +1,13 @@
 class ArtistsController < ApplicationController
+
   def index
-    @artists = Artist.all
+    @pref = Preference.all.order(:id).last
+      if @pref && @pref.artist_sort_order == "DESC"
+        @artists = Artist.all.order("id DESC")
+      elsif @pref && @pref.artist_sort_order == "ASC"
+        @artists = Artist.all.order("id ASC")
+      else @artists = Artist.all
+      end
   end
 
   def show
@@ -8,7 +15,12 @@ class ArtistsController < ApplicationController
   end
 
   def new
-    @artist = Artist.new
+    @pref = Preference.all.order(:id).last
+    if @pref && @pref.allow_create_artists == false
+      redirect_to artists_path
+    else
+      @artist = Artist.new
+    end
   end
 
   def create
