@@ -1,0 +1,12 @@
+<h1>Current Preference:</h1>
+
+
+  Preference id: <%= @preference.id %> <br>
+  <%= link_to "Edit Preference", edit_admin_preference_path(@preference) %>
+  <p>Artists settings: <br>
+    <%= @preference.allow_create_artists %> <br>
+    <%= @preference.artist_sort_order %> <br>
+   Songs settings: <br>
+    <%= @preference.allow_create_songs %> <br>
+    <%= @preference.song_sort_order %>
+  </p>

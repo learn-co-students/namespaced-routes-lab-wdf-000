@@ -1,0 +1,13 @@
+<h1>Preferences:</h1>
+
+<% @preferences.each do |preference|%>
+  Preference id: <%= preference.id %> <%= link_to "Edit Preference", edit_admin_preference_path(preference) %><br>
+  <p>Artists settings: <br>
+    <%= preference.allow_create_artists %> <br>
+    <%= preference.artist_sort_order %> <br>
+   Songs settings: <br>
+    <%= preference.allow_create_songs %> <br>
+    <%= preference.song_sort_order %>
+  </p>
+
+<% end %>
