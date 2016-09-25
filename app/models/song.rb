@@ -1,6 +1,14 @@
 class Song < ActiveRecord::Base
   belongs_to :artist
 
+  def self.display(preferences)
+    if preferences
+      Song.all.order(title: preferences.song_sort_order)
+    else
+      Song.all
+    end
+  end
+
   def artist_name
     self.try(:artist).try(:name)
   end

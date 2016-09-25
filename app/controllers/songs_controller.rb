@@ -8,7 +8,8 @@ class SongsController < ApplicationController
         @songs = @artist.songs
       end
     else
-      @songs = Song.all
+      # @songs = Song.all
+      @songs = Song.display(Preference.last)
     end
   end
 
@@ -25,7 +26,12 @@ class SongsController < ApplicationController
   end
 
   def new
-    @song = Song.new
+    pref = Preference.last
+    if pref.allow_create_songs
+      @song = Song.new
+    else
+      redirect_to songs_path
+    end
   end
 
   def create
