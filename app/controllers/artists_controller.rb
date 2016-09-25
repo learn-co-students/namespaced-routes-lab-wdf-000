@@ -9,6 +9,12 @@ class ArtistsController < ApplicationController
 
   def new
     @artist = Artist.new
+
+    # Unless preference for creating artists is true, redirect
+    # Also handles rendering the appropriate form with an empty instance of Artist
+    unless Preference.last.allow_create_artists
+      redirect_to artists_path
+    end
   end
 
   def create
