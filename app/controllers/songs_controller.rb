@@ -25,8 +25,9 @@ class SongsController < ApplicationController
   end
 
   def new
-    p = Preference.find_by(allow_create_songs: false)
-    if p
+    p = Preference.all.last
+
+    if !p.allow_create_songs
       redirect_to songs_path
     else
       @song = Song.new
